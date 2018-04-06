@@ -5,10 +5,9 @@ import svgwrite
 
 class Positioner(object):
 
-    def __init__(self, direction='vertical', buffer_space=2):
+    def __init__(self, direction='vertical', buffer_space=2, begin_offset=(0, 0)):
         self.children = []
-        self.begin_x = 0
-        self.begin_y = 0
+        self.begin_x, self.begin_y = begin_offset
         self.direction = direction
         self.buffer_space = buffer_space
 
@@ -31,7 +30,7 @@ class Positioner(object):
             child.position = (x, y)
             x += (child.width + self.buffer_space)
 
-    def set_child_positions_vertically(self, x, y):
+    def _set_child_positions_vertically(self, x, y):
         for child in self.children:
             child.position = (x, y)
             y += (child.width + self.buffer_space)
